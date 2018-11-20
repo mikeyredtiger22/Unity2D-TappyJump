@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour {
     }
 
     int score = 0;
-    bool gameOver = false;
+    bool gameOver = true;
 
     public bool GameOver { get { return gameOver; } }
     public int Score { get { return score; } }
@@ -53,6 +53,8 @@ public class GameManager : MonoBehaviour {
     {
         SetPageState(PageState.None);
         OnGameStarted(); // event sent to Tap Controller
+        score = 0;
+        gameOver = false;
     }
 
     void OnPlayerDied()

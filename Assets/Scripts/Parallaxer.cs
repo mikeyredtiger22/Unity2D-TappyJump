@@ -8,7 +8,7 @@ public class Parallaxer : MonoBehaviour
     class PoolObject
     {
         public Transform transform;
-        public bool inUse = false;
+        public bool inUse;
         public PoolObject(Transform transform) { this.transform = transform; }
         public void Use() { inUse = true; }
         public void Dispose() { inUse = false; }
@@ -33,12 +33,13 @@ public class Parallaxer : MonoBehaviour
 
     float spawnTimer;
     float targetAspect;
+    float aspectModifier;
     PoolObject[] poolObjects;
     GameManager gameManager;
 
     private void Awake()
     {
-        Configure(); /////////
+        Configure();
     }
 
     void Start()
@@ -48,7 +49,6 @@ public class Parallaxer : MonoBehaviour
 
     void Update()
     {
-        System.Console.WriteLine("LOL");
         if (gameManager.GameOver) return;
         Shift();
         spawnTimer += Time.deltaTime;
@@ -73,6 +73,7 @@ public class Parallaxer : MonoBehaviour
     void Configure()
     {
         targetAspect = targetAspectRatio.x / targetAspectRatio.y;
+        aspectModifier = Camera.main.aspect / targetAspect;
         poolObjects = new PoolObject[poolSize];
         for (int i = 0; i < poolObjects.Length; i++)
         {
@@ -91,17 +92,15 @@ public class Parallaxer : MonoBehaviour
 
     void GameManager_OnGameOverConfirmed()
     {
-        //Configure();
-        if (spawnImmediate)
-        {
-            SpawnImmediate();
-        }
         for (int i = 0; i < poolObjects.Length; i++)
         {
             poolObjects[i].Dispose();
             poolObjects[i].transform.position = Vector3.one * 10;
         }
-
+        if (spawnImmediate)
+        {
+            SpawnImmediate();
+        }
     }
 
     void Spawn() // Changes position of object - Simulating spawning
@@ -109,7 +108,7 @@ public class Parallaxer : MonoBehaviour
         Transform transform = GetPoolObject();
         if (transform == null) return; // Pool size is too small
         Vector3 pos = Vector3.zero;
-        pos.x = defaultSpawnPos.x; // edit later
+        pos.x = defaultSpawnPos.x * aspectModifier; // edit later
         pos.y = defaultSpawnPos.y; //Random.Range(ySpawnRange.min, ySpawnRange.max);
         transform.position = pos;
 
@@ -120,7 +119,7 @@ public class Parallaxer : MonoBehaviour
         Transform transform = GetPoolObject();
         if (transform == null) return; // Pool size is too small
         Vector3 pos = Vector3.zero;
-        pos.x = spawnImmediatePos.x; // edit later
+        pos.x = spawnImmediatePos.x * aspectModifier; // edit later
         pos.y = spawnImmediatePos.y; ; //Random.Range(ySpawnRange.min, ySpawnRange.max);
         transform.position = pos;
     }
@@ -136,7 +135,7 @@ public class Parallaxer : MonoBehaviour
 
     void CheckDisposeObject(PoolObject poolObject)
     {
-        if (poolObject.transform.position.x < -defaultSpawnPos.x)
+        if (poolObject.transform.position.x < -defaultSpawnPos.x * aspectModifier)
         {
             poolObject.Dispose();
             poolObject.transform.position = Vector3.one * 10; // do we need this?
