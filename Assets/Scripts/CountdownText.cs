@@ -24,7 +24,7 @@ public class CountdownText : MonoBehaviour {
         for (int i = 0; i < count; i++)
         {
             countDown.text = (count - i).ToString();
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds((float)0.5);
         }
 
         OnCountDownFinished();

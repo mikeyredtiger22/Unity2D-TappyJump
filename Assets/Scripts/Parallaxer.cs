@@ -87,6 +87,7 @@ public class Parallaxer : MonoBehaviour
         if (spawnImmediate)
         {
             SpawnImmediate();
+            Spawn();
         }
     }
 
@@ -100,6 +101,7 @@ public class Parallaxer : MonoBehaviour
         if (spawnImmediate)
         {
             SpawnImmediate();
+            Spawn();
         }
     }
 
