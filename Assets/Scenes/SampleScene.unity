@@ -768,7 +768,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Prefab: {fileID: 1381284495889336, guid: dc4c74788bc72416a8f2f20b09af893e, type: 2}
-  poolSize: 8
+  poolSize: 2
   shiftSpeed: 2
   spawnRate: 10
   firstSpawnRate: 5
@@ -1542,7 +1542,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1659519922
 Transform:
   m_ObjectHideFlags: 0
@@ -1570,7 +1570,7 @@ MonoBehaviour:
   Prefab: {fileID: 1048288555853334, guid: 3d0ba2475df1c4db5935b1c1330fe919, type: 2}
   poolSize: 8
   shiftSpeed: 1.2
-  spawnRate: 6
+  spawnRate: 10
   firstSpawnRate: 0
   ySpawnRange:
     min: 0
