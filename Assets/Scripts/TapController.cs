@@ -36,7 +36,7 @@ public class TapController : MonoBehaviour {
         }
         if (Input.GetMouseButtonDown(0)) 
         {
-            Time.timeScale += 1;
+            //Time.timeScale += 1;
             transform.rotation = forwardRotation;
             rigidbody.AddForce(Vector2.up * tapForce, ForceMode2D.Force);
 
