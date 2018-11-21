@@ -25,6 +25,7 @@ public class Parallaxer : MonoBehaviour
     public int poolSize;
     public float shiftSpeed;
     public float spawnRate;
+    public float firstSpawnRate;
     public YSpawnRange ySpawnRange;
     public Vector3 defaultSpawnPos;
     public bool spawnImmediate; // Should be on screen at start
@@ -45,6 +46,7 @@ public class Parallaxer : MonoBehaviour
     void Start()
     {
         gameManager = GameManager.Instance;
+        spawnTimer = spawnRate - firstSpawnRate;
     }
 
     void Update()
@@ -87,7 +89,7 @@ public class Parallaxer : MonoBehaviour
         if (spawnImmediate)
         {
             SpawnImmediate();
-            Spawn();
+            //Spawn();
         }
     }
 
@@ -101,7 +103,7 @@ public class Parallaxer : MonoBehaviour
         if (spawnImmediate)
         {
             SpawnImmediate();
-            Spawn();
+            //Spawn();
         }
     }
 

@@ -167,6 +167,10 @@ Prefab:
       propertyPath: m_SortingOrder
       value: -8
       objectReference: {fileID: 0}
+    - target: {fileID: 1048288555853334, guid: 3d0ba2475df1c4db5935b1c1330fe919, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3d0ba2475df1c4db5935b1c1330fe919, type: 2}
   m_IsPrefabAsset: 0
@@ -719,6 +723,7 @@ Transform:
   - {fileID: 871214883}
   - {fileID: 1980717043}
   - {fileID: 703469730}
+  - {fileID: 1659519922}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -766,6 +771,7 @@ MonoBehaviour:
   poolSize: 8
   shiftSpeed: 2
   spawnRate: 10
+  firstSpawnRate: 5
   ySpawnRange:
     min: 0
     max: 0
@@ -986,7 +992,7 @@ BoxCollider2D:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 871214881}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -1521,6 +1527,58 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8d77cd6a4c959468885a88d836fd98ab, type: 2}
   m_IsPrefabAsset: 0
+--- !u!1 &1659519921
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1659519922}
+  - component: {fileID: 1659519923}
+  m_Layer: 0
+  m_Name: CloudParallax
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1659519922
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1659519921}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 694661501}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1659519923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1659519921}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 572897bd90e904c0c9621e68c8cc760c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Prefab: {fileID: 1048288555853334, guid: 3d0ba2475df1c4db5935b1c1330fe919, type: 2}
+  poolSize: 8
+  shiftSpeed: 1.2
+  spawnRate: 6
+  firstSpawnRate: 0
+  ySpawnRange:
+    min: 0
+    max: 0
+  defaultSpawnPos: {x: 15, y: -2, z: 0}
+  spawnImmediate: 1
+  spawnImmediatePos: {x: 5, y: -2, z: 0}
+  targetAspectRatio: {x: 9, y: 16}
 --- !u!1 &1752673593
 GameObject:
   m_ObjectHideFlags: 0
@@ -1750,6 +1808,7 @@ MonoBehaviour:
   poolSize: 4
   shiftSpeed: 2
   spawnRate: 2
+  firstSpawnRate: 0
   ySpawnRange:
     min: 0
     max: 0
