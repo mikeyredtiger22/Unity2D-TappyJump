@@ -49,6 +49,7 @@ public class TapController : MonoBehaviour {
         if (collision.tag == "ScoreZone")
         {
             OnPlayerScored(); // event sent to GameManager
+
         }
 
         if (collision.tag == "DeadZone")

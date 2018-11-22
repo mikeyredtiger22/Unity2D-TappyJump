@@ -9,6 +9,7 @@ public class Parallaxer : MonoBehaviour
     {
         public Transform transform;
         public bool inUse;
+        public bool consumed = false; // Used for consumable items to be removed from scene
         public PoolObject(Transform transform) { this.transform = transform; }
         public void Use() { inUse = true; }
         public void Dispose() { inUse = false; }
@@ -26,6 +27,7 @@ public class Parallaxer : MonoBehaviour
     public float shiftSpeed;
     public float spawnRate;
     public float firstSpawnRate;
+    public bool useSpawnRange;
     public YSpawnRange ySpawnRange;
     public Vector3 defaultSpawnPos;
     public bool spawnImmediate; // Should be on screen at start
@@ -37,6 +39,8 @@ public class Parallaxer : MonoBehaviour
     float aspectModifier;
     PoolObject[] poolObjects;
     GameManager gameManager;
+
+    float playerPosX;
 
     private void Awake()
     {
@@ -84,6 +88,7 @@ public class Parallaxer : MonoBehaviour
             transform.SetParent(transform);
             transform.position = Vector3.one * 10;
             poolObjects[i] = new PoolObject(transform);
+            //int a = IndexOf(poolObjects, gameObject);
         }
 
         if (spawnImmediate)
@@ -110,10 +115,10 @@ public class Parallaxer : MonoBehaviour
     void Spawn() // Changes position of object - Simulating spawning
     {
         Transform transform = GetPoolObject();
-        if (transform == null) return; // Pool size is too small
+        if (transform == null) return;
         Vector3 pos = Vector3.zero;
-        pos.x = defaultSpawnPos.x * aspectModifier; // edit later
-        pos.y = defaultSpawnPos.y; //Random.Range(ySpawnRange.min, ySpawnRange.max);
+        pos.x = defaultSpawnPos.x * aspectModifier;
+        pos.y = useSpawnRange ? Random.Range(ySpawnRange.min, ySpawnRange.max) : defaultSpawnPos.y;
         transform.position = pos;
 
     }
@@ -121,10 +126,10 @@ public class Parallaxer : MonoBehaviour
     void SpawnImmediate()
     {
         Transform transform = GetPoolObject();
-        if (transform == null) return; // Pool size is too small
+        if (transform == null) return;
         Vector3 pos = Vector3.zero;
-        pos.x = spawnImmediatePos.x * aspectModifier; // edit later
-        pos.y = spawnImmediatePos.y; ; //Random.Range(ySpawnRange.min, ySpawnRange.max);
+        pos.x = spawnImmediatePos.x * aspectModifier;
+        pos.y = useSpawnRange ? Random.Range(ySpawnRange.min, ySpawnRange.max) : spawnImmediatePos.y;
         transform.position = pos;
     }
 
@@ -139,10 +144,14 @@ public class Parallaxer : MonoBehaviour
 
     void CheckDisposeObject(PoolObject poolObject)
     {
-        if (poolObject.transform.position.x < -defaultSpawnPos.x * aspectModifier)
+        if (poolObject.consumed || poolObject.transform.position.x < -defaultSpawnPos.x * aspectModifier)
         {
             poolObject.Dispose();
-            poolObject.transform.position = Vector3.one * 10; // do we need this?
+            poolObject.transform.position = Vector3.one * 10;
+            if (poolObject.consumed)
+            {
+                poolObject.consumed = false;
+            }
         }
     }
 
@@ -158,5 +167,37 @@ public class Parallaxer : MonoBehaviour
             }
         }
         return null;
+    }
+
+    public void OnCollisionWithPlayer()
+    {
+        PoolObject closestToPlayer = null;
+        // Find consumable closest to player/center
+        for (int i = 0; i < poolObjects.Length; i++)
+        {
+            PoolObject currentObject = poolObjects[i];
+            float closestObjectDistance = float.MaxValue;
+            if (poolObjects[i].inUse)
+            {
+                if (closestToPlayer == null)
+                {
+                    closestToPlayer = currentObject;
+                    closestObjectDistance = Mathf.Abs((float)-1.5 - (currentObject.transform.position.x));
+                }
+                else
+                {
+
+                    float currentObjectDistance = Mathf.Abs((float)-1.5 - (currentObject.transform.position.x));
+                    if (currentObjectDistance < closestObjectDistance)
+                    {
+                        closestToPlayer = currentObject;
+                        closestObjectDistance = currentObjectDistance;
+                    }
+                }
+            }
+        }
+
+        //closestToPlayer.Dispose();
+        closestToPlayer.consumed = true;
     }
 }

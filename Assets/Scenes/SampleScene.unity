@@ -171,7 +171,7 @@ MonoBehaviour:
     m_Font: {fileID: 12800000, guid: bb2dffc07ad704a28aa9186221cc902e, type: 2}
     m_FontSize: 0
     m_FontStyle: 0
-    m_BestFit: 1
+    m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 190
     m_Alignment: 2
@@ -392,6 +392,7 @@ MonoBehaviour:
   shiftSpeed: 0.25
   spawnRate: 80
   firstSpawnRate: 40
+  useSpawnRange: 0
   ySpawnRange:
     min: 0
     max: 0
@@ -486,6 +487,59 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 311514678}
   m_CullTransparentMesh: 0
+--- !u!1 &347067335
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 347067336}
+  - component: {fileID: 347067337}
+  m_Layer: 0
+  m_Name: BrainParallax
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &347067336
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 347067335}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 694661501}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &347067337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 347067335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 572897bd90e904c0c9621e68c8cc760c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Prefab: {fileID: 1920124627}
+  poolSize: 4
+  shiftSpeed: 2
+  spawnRate: 2
+  firstSpawnRate: 1
+  useSpawnRange: 1
+  ySpawnRange:
+    min: -3.6
+    max: 4.2
+  defaultSpawnPos: {x: 4, y: 1, z: 0}
+  spawnImmediate: 0
+  spawnImmediatePos: {x: 0, y: 0, z: 0}
+  targetAspectRatio: {x: 9, y: 16}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -709,6 +763,8 @@ Transform:
   - {fileID: 703469730}
   - {fileID: 1659519922}
   - {fileID: 291784552}
+  - {fileID: 347067336}
+  - {fileID: 1825421807}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -757,6 +813,7 @@ MonoBehaviour:
   shiftSpeed: 2
   spawnRate: 10
   firstSpawnRate: 5
+  useSpawnRange: 0
   ySpawnRange:
     min: 0
     max: 0
@@ -887,7 +944,7 @@ GameObject:
   - component: {fileID: 871214886}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -945,7 +1002,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 871214881}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.47, y: 2.98, z: 0}
+  m_LocalPosition: {x: -1.5, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 694661501}
@@ -1570,6 +1627,7 @@ MonoBehaviour:
   shiftSpeed: 1.2
   spawnRate: 17
   firstSpawnRate: 8.5
+  useSpawnRange: 0
   ySpawnRange:
     min: 0
     max: 0
@@ -1652,6 +1710,58 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1752673593}
   m_CullTransparentMesh: 0
+--- !u!1001 &1825421806
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 694661501}
+    m_Modifications:
+    - target: {fileID: 4481930009453474, guid: fcf86a43e3121472f97dc2721ee08e5a, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 4.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4481930009453474, guid: fcf86a43e3121472f97dc2721ee08e5a, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -3.43
+      objectReference: {fileID: 0}
+    - target: {fileID: 4481930009453474, guid: fcf86a43e3121472f97dc2721ee08e5a, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4481930009453474, guid: fcf86a43e3121472f97dc2721ee08e5a, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4481930009453474, guid: fcf86a43e3121472f97dc2721ee08e5a, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4481930009453474, guid: fcf86a43e3121472f97dc2721ee08e5a, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4481930009453474, guid: fcf86a43e3121472f97dc2721ee08e5a, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4481930009453474, guid: fcf86a43e3121472f97dc2721ee08e5a, type: 2}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 114161612578186628, guid: fcf86a43e3121472f97dc2721ee08e5a,
+        type: 2}
+      propertyPath: parallax
+      value: 
+      objectReference: {fileID: 347067337}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: fcf86a43e3121472f97dc2721ee08e5a, type: 2}
+  m_IsPrefabAsset: 0
+--- !u!4 &1825421807 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4481930009453474, guid: fcf86a43e3121472f97dc2721ee08e5a,
+    type: 2}
+  m_PrefabInternal: {fileID: 1825421806}
 --- !u!1 &1836698852
 GameObject:
   m_ObjectHideFlags: 0
@@ -1710,7 +1820,7 @@ MonoBehaviour:
     m_Font: {fileID: 12800000, guid: bb2dffc07ad704a28aa9186221cc902e, type: 2}
     m_FontSize: 0
     m_FontStyle: 0
-    m_BestFit: 1
+    m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 190
     m_Alignment: 2
@@ -1763,6 +1873,11 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1920124627 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1681096693870082, guid: fcf86a43e3121472f97dc2721ee08e5a,
+    type: 2}
+  m_PrefabInternal: {fileID: 1825421806}
 --- !u!1 &1980717042
 GameObject:
   m_ObjectHideFlags: 0
@@ -1808,6 +1923,7 @@ MonoBehaviour:
   shiftSpeed: 2
   spawnRate: 2
   firstSpawnRate: 0
+  useSpawnRange: 0
   ySpawnRange:
     min: 0
     max: 0
