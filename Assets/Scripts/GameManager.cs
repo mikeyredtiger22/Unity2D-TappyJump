@@ -75,6 +75,10 @@ public class GameManager : MonoBehaviour
     {
         score++;
         scoreText.text = score.ToString();
+        if (score % 10 == 0)
+        {
+            Time.timeScale += 0.1f;
+        }
     }
 
     void OnPlayerHurt()
@@ -83,6 +87,10 @@ public class GameManager : MonoBehaviour
         {
             score--;
             scoreText.text = score.ToString();
+            if (score > 0 && score % 10 == 9)
+            {
+                Time.timeScale -= 0.1f;
+            }
         }
     }
 
