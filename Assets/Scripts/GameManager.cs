@@ -79,7 +79,7 @@ public class GameManager : MonoBehaviour
 
     void OnPlayerHurt()
     {
-        if (score > 1)
+        if (score > 0)
         {
             score--;
             scoreText.text = score.ToString();
