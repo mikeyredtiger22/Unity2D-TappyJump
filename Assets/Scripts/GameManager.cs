@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GameManager : MonoBehaviour {
+public class GameManager : MonoBehaviour
+{
 
     public delegate void GameDelegate();
     public static event GameDelegate OnGameStarted;
@@ -40,6 +41,7 @@ public class GameManager : MonoBehaviour {
         CountdownText.OnCountDownFinished += OnCountDownFinished; // subscribe / listener
         TapController.OnPlayerDied += OnPlayerDied; // subscribe / listener
         TapController.OnPlayerScored += OnPlayerScored; // subscribe / listener
+        TapController.OnPlayerHurt += OnPlayerHurt; // subscribe / listener
     }
 
     private void OnDisable()
@@ -47,6 +49,7 @@ public class GameManager : MonoBehaviour {
         CountdownText.OnCountDownFinished -= OnCountDownFinished; // remove listener / unsubscribe
         TapController.OnPlayerDied -= OnPlayerDied; // subscribe / listener
         TapController.OnPlayerScored -= OnPlayerScored; // subscribe / listener
+        TapController.OnPlayerHurt -= OnPlayerHurt; // subscribe / listener
     }
 
     void OnCountDownFinished()
@@ -61,7 +64,8 @@ public class GameManager : MonoBehaviour {
     {
         gameOver = true;
         int savedScore = PlayerPrefs.GetInt("HIGHSCORE");
-        if (score > savedScore) {
+        if (score > savedScore)
+        {
             PlayerPrefs.SetInt("HIGHSCORE", score);
         }
         SetPageState(PageState.GameOver);
@@ -72,6 +76,16 @@ public class GameManager : MonoBehaviour {
         score++;
         scoreText.text = score.ToString();
     }
+
+    void OnPlayerHurt()
+    {
+        if (score > 1)
+        {
+            score--;
+            scoreText.text = score.ToString();
+        }
+    }
+
 
     public void ConfirmGameOver() // RESTART
     {
@@ -87,7 +101,7 @@ public class GameManager : MonoBehaviour {
 
     void SetPageState(PageState pageState)
     {
-        switch(pageState)
+        switch (pageState)
         {
             case PageState.None:
                 startPage.SetActive(false);
@@ -111,6 +125,6 @@ public class GameManager : MonoBehaviour {
                 gameOverPage.SetActive(false);
                 countdownPage.SetActive(true);
                 break;
-         }
+        }
     }
 }

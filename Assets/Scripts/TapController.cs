@@ -8,6 +8,7 @@ public class TapController : MonoBehaviour {
     public delegate void PlayerDelegate();
     public static event PlayerDelegate OnPlayerDied;
     public static event PlayerDelegate OnPlayerScored;
+    public static event PlayerDelegate OnPlayerHurt;
 
     public float tapForce = 10;
     public float tiltSmooth = 5;
@@ -46,10 +47,13 @@ public class TapController : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.tag == "Flower")
+        {
+            OnPlayerHurt(); // event sent to GameManager
+        }
         if (collision.tag == "ScoreZone")
         {
             OnPlayerScored(); // event sent to GameManager
-
         }
 
         if (collision.tag == "DeadZone")

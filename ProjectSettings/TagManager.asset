@@ -6,6 +6,7 @@ TagManager:
   tags:
   - DeadZone
   - ScoreZone
+  - Flower
   layers:
   - Default
   - TransparentFX
