@@ -171,33 +171,55 @@ public class Parallaxer : MonoBehaviour
 
     public void OnCollisionWithPlayer()
     {
-        PoolObject closestToPlayer = null;
+        //PoolObject closestToPlayer = null;
+        int count = 0;
+        int count2 = 0;
+        float[] posXArr = new float[4];
         // Find consumable closest to player/center
         for (int i = 0; i < poolObjects.Length; i++)
         {
+            count2++;
             PoolObject currentObject = poolObjects[i];
-            float closestObjectDistance = float.MaxValue;
-            if (poolObjects[i].inUse)
+            //float closestObjectDistance = float.MaxValue;
+            if (currentObject.inUse)
             {
-                if (closestToPlayer == null)
-                {
-                    closestToPlayer = currentObject;
-                    closestObjectDistance = Mathf.Abs((float)-1.5 - (currentObject.transform.position.x));
-                }
-                else
-                {
+                // 0.4 to -0.25
+                float xPos = currentObject.transform.position.x;
+                posXArr[i] = xPos;
 
-                    float currentObjectDistance = Mathf.Abs((float)-1.5 - (currentObject.transform.position.x));
-                    if (currentObjectDistance < closestObjectDistance)
-                    {
-                        closestToPlayer = currentObject;
-                        closestObjectDistance = currentObjectDistance;
-                    }
+                if (xPos < -0 && xPos > -3)
+                {
+                    count++;
+                    currentObject.consumed = true;
                 }
+
+                //if (closestToPlayer == null)
+                //{
+                //    closestToPlayer = currentObject;
+                //    closestObjectDistance = Mathf.Abs((float)-1.5 - (currentObject.transform.position.x));
+                //}
+                //else
+                //{
+                //    float currentObjectDistance = Mathf.Abs((float)-1.5 - (currentObject.transform.position.x));
+                //    if (currentObjectDistance < closestObjectDistance)
+                //    {
+                //        closestToPlayer = currentObject;
+                //        closestObjectDistance = currentObjectDistance;
+                //    }
+                //}
             }
         }
+        Debug.Log("Count: " + count);
+        Debug.Log("In Use: " + count2); // !!! 4 - should be 2
+        string posXArrString = "";
+        foreach (var item in posXArr)
+        {
+            posXArrString += " : " + item;
+        }
 
+        Debug.Log("PosXArr: " + posXArrString); 
         //closestToPlayer.Dispose();
-        closestToPlayer.consumed = true;
+        //Debug.Log(Mathf.Abs((float)-1.5 - (closestToPlayer.transform.position.x)));
+        //closestToPlayer.consumed = true;
     }
 }

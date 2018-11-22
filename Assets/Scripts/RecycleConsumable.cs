@@ -10,7 +10,6 @@ public class RecycleConsumable : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-
             parallax.OnCollisionWithPlayer();
         }
     }
